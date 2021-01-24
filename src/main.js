@@ -36,7 +36,6 @@ function removeSplashScreen() {
 function createGameScreen() {
   gameScreen = buildDom(`
   <div id="game">
-    <main>
     <header>
     <div id="left">
       <div id="lives">
@@ -48,20 +47,19 @@ function createGameScreen() {
         <span class="value"></span>
       </div>
     </div>
-    <div id="rigth">
+    <div id="right">
       <div id="level">
         <span class="label">Level:</span>
         <span class="value"></span>
       </div>
     </div>
       </header>
-      <div class="canvas-container">
+      <div id="canvas-container">
         <canvas></canvas>
       </div>
       <div id="active-area">
         <img src="./img/ActiveArea.png" alt="Active Area" />
       </div>
-    </main>
   </div>`);
   document.body.appendChild(gameScreen);
   setBackground("../img/Background1.jpg");

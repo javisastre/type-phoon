@@ -29,11 +29,14 @@
 
 #game header {
   background-color: #333333;
+  height: 4vh;
   color: #eeeeee;
   font-family: "Permanent Marker", Arial, sans-serif;
+  font-size: 1.5vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 #left {
@@ -44,12 +47,19 @@
   padding-left: 1vw;
 }
 
-#rigth > div {
+#right > div {
   padding-right: 1vw;
 }
 
-#rigth {
+#right {
   text-align: right;
+}
+
+#canvas-container {
+  width: auto;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
 }
 
 #active-area img {
