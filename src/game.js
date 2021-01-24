@@ -54,7 +54,11 @@ class Game {
       // we draw all the letters
       this.library.forEach((letter) => {
         letter.updatePosition();
-        letter.draw();
+        if (letter.y < 600) {
+          letter.draw();
+        } else {
+          letter.explode();
+        }
       });
 
       // we call the looper inside the looper
@@ -66,10 +70,10 @@ class Game {
   }
 
   addLetter() {
-    const randomLetter = Math.floor(Math.random() * letters.length);
-    const letter = new Letter(randomLetter, this.canvas);
-    this.library.push(letter);
+    if (Math.random() > 0.9) {
+      const randomLetter = Math.floor(Math.random() * letters.length);
+      const letter = new Letter(randomLetter, this.canvas);
+      this.library.push(letter);
+    }
   }
-
-  
 }

@@ -5,10 +5,10 @@ class Letter {
     this.char = letters[idNum].char;
     this.normal = letters[idNum].normalImg;
     this.shiny = letters[idNum].shinyImg;
-    this.size = 20;
-    this.x = Math.floor(Math.random() * canvas.offsetWidth);
+    this.size = 60;
+    this.x = Math.floor(Math.random() * canvas.offsetWidth) - this.size;
     this.y = -30;
-    this.fallSpeed = 10;
+    this.fallSpeed = 5;
   }
 
   updatePosition() {
@@ -25,7 +25,19 @@ class Letter {
       this.size,
       this.size
     );
-    // this.canvasContext.fillStyle = "red";
-    // this.canvasContext.fillRect(this.x, this.y, this.size, this.size);
+  }
+
+  explode() {
+    for (let i = 0; i < 10; i++) {
+      const explosionImage = new Image(this.size, this.size);
+      explosionImage.src = [i];
+      this.canvasContext.drawImage(
+        explosionImage,
+        this.x,
+        this.y,
+        this.size,
+        this.size
+      );
+    }
   }
 }
