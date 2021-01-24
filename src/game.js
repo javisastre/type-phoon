@@ -24,10 +24,6 @@ class Game {
 
     //set canvas dimensions to the container around it
     const canvasContainer = document.querySelector("#canvas-container");
-    console.log(canvasContainer);
-    let containerW = canvasContainer.offsetWidth;
-    let containerH = canvasContainer.clientHeight;
-    console.log(containerW + "x" + containerH);
 
     this.canvas.setAttribute("width", canvasContainer.offsetWidth);
     this.canvas.setAttribute("height", canvasContainer.offsetHeight);
@@ -49,17 +45,23 @@ class Game {
 
   mainLoop() {
     const loop = () => {
+      // first we clear the canvas
+      this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
       // we create one random letter per loop
       this.addLetter();
 
-      // we all draw the letters
-
+      // we draw all the letters
       this.library.forEach((letter) => {
         letter.updatePosition();
         letter.draw();
       });
+
+      // we call the looper inside the looper
+      window.requestAnimationFrame(loop);
     };
 
+    // we call the animation looper
     window.requestAnimationFrame(loop);
   }
 
@@ -68,7 +70,6 @@ class Game {
     const letter = new Letter(randomLetter, this.canvas);
     this.library.push(letter);
   }
+
+  
 }
-// addEventListener("mouseover", function (event) {
-//   console.log("over");
-// });

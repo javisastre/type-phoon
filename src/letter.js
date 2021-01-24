@@ -6,18 +6,26 @@ class Letter {
     this.normal = letters[idNum].normalImg;
     this.shiny = letters[idNum].shinyImg;
     this.size = 20;
-    this.x = 0; //Math.floor(Math.random() * canvas.offsetWidth);
-    this.y = 540;
-    this.fallSpeed = 20;
+    this.x = Math.floor(Math.random() * canvas.offsetWidth);
+    this.y = -30;
+    this.fallSpeed = 10;
   }
 
   updatePosition() {
     this.y += this.fallSpeed;
-    console.log(this.y);
   }
 
   draw() {
-    this.canvasContext.fillStyle = "red";
-    this.canvasContext.fillRect(this.x, this.y, this.size, this.size);
+    const letterImage = new Image(this.size, this.size);
+    letterImage.src = this.normal;
+    this.canvasContext.drawImage(
+      letterImage,
+      this.x,
+      this.y,
+      this.size,
+      this.size
+    );
+    // this.canvasContext.fillStyle = "red";
+    // this.canvasContext.fillRect(this.x, this.y, this.size, this.size);
   }
 }
