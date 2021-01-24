@@ -14,7 +14,7 @@ function buildDom(htmlCode) {
 function createSplashScreen() {
   // we insert the code in the index.html file
   splashScreen = buildDom(`
-    <div id="title-and-button">
+    <div id="splash">
       <img src="./img/SplashScreenTitle.png" alt="Type-phoon" id ="game-title">
       <button>Start Game</button>
     </div>
@@ -34,8 +34,34 @@ function removeSplashScreen() {
 }
 
 function createGameScreen() {
-  gameScreen = buildDom(`<div id="game">
-  
+  gameScreen = buildDom(`
+  <div id="game">
+    <main>
+    <header>
+    <div id="left">
+      <div id="lives">
+        <span class="label">Lives:</span>
+        <span class="value"></span>
+      </div>
+      <div id="score">
+        <span class="label">Score:</span>
+        <span class="value"></span>
+      </div>
+    </div>
+    <div id="rigth">
+      <div id="level">
+        <span class="label">Level:</span>
+        <span class="value"></span>
+      </div>
+    </div>
+      </header>
+      <div class="canvas-container">
+        <canvas></canvas>
+      </div>
+      <div id="active-area">
+        <img src="./img/ActiveArea.png" alt="Active Area" />
+      </div>
+    </main>
   </div>`);
   document.body.appendChild(gameScreen);
   setBackground("../img/Background1.jpg");
@@ -70,7 +96,6 @@ function startGame() {
   removeGameOverScreen();
   createGameScreen();
   // we create a new instance of the Game class
-  console.log("game started");
   game = new Game();
   // we launch the game with its start method
   game.start();

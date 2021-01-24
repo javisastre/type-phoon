@@ -1,9 +1,42 @@
-<div id="title-and-button">
+<!-- Splash HTML code -->
+
+<div id="splash">
   <img src="./img/SplashScreenTitle.png" alt="Type-phoon" id="game-title" />
   <button>Start Game</button>
 </div>
 
-<div id="game"></div>
+<!-- Game HTML code -->
+
+<div id="game">
+  <main>
+    <header>
+      <div id="left">
+        <div id="lives">
+          <span class="label">Lives:</span>
+          <span class="value"></span>
+        </div>
+        <div id="score">
+          <span class="label">Score:</span>
+          <span class="value"></span>
+        </div>
+      </div>
+      <div id="rigth">
+        <div id="level">
+          <span class="label">Level:</span>
+          <span class="value"></span>
+        </div>
+      </div>
+    </header>
+    <div class="canvas-container">
+      <canvas></canvas>
+    </div>
+    <div id="active-area">
+      <img src="./img/ActiveArea.png" alt="Active Area" />
+    </div>
+  </main>
+</div>
+
+<!-- GameOver HTML code -->
 
 <div id="gameOver">
   <img
