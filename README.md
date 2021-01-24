@@ -83,7 +83,7 @@ Definition of the different states and their transition (transition functions)
 # Backlog
 
 - 3D-like visual implementation of the letters.
-- background immplementation.
+- background implementation.
 - background shakes on each impact.
 
 
