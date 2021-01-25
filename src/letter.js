@@ -18,15 +18,16 @@ class Letter {
     this.y += this.fallSpeed;
   }
 
-  draw() {
+  draw(activeHeigth) {
+    const explosionLimit = activeHeigth + (activeHeigth * 3) / 4;
     if (this.win === true) {
       this.printImage(winAnimation[this.winCounter]);
       this.winCounter++;
-    } else if (this.y <= 450) {
+    } else if (this.y <= activeHeigth) {
       this.printImage(this.normal);
-    } else if (this.y > 450 && this.y < 700) {
+    } else if (this.y > activeHeigth && this.y <= explosionLimit) {
       this.printImage(this.shiny);
-    } else {
+    } else if (this.y > explosionLimit) {
       this.printImage(explosions[this.explosionCounter]);
       this.explosionCounter++;
     }

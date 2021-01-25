@@ -93,10 +93,7 @@ function startGame() {
   removeSplashScreen();
   removeGameOverScreen();
   createGameScreen();
-  // we create a new instance of the Game class
-  game = new Game();
-  // we launch the game with its start method
-  game.start();
+  loadGameImages();
 }
 
 function setBackground(backgroundUrl) {
@@ -104,6 +101,25 @@ function setBackground(backgroundUrl) {
   document.body.style.backgroundSize = "cover";
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.backgroundPosition = "bottom center";
+}
+
+function loadGameImages() {
+  const allImages = gameScreen.querySelectorAll("img");
+  const totalImages = allImages.length;
+  let loadedImages = 0;
+
+  allImages.forEach((image) => {
+    image.addEventListener("load", () => {
+      loadedImages++;
+      const allImagesLoaded = loadedImages === totalImages;
+      if (allImagesLoaded) {
+        // we create a new instance of the Game class
+        game = new Game();
+        // we launch the game with its start method
+        game.start();
+      }
+    });
+  });
 }
 
 window.addEventListener("load", createSplashScreen);
