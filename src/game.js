@@ -1,8 +1,8 @@
 "use strict";
 
-let lives;
-let score;
-let level;
+let livesHTML;
+let scoreHTML;
+let levelHTML;
 let activeArea;
 
 class Game {
@@ -29,15 +29,15 @@ class Game {
     this.canvas.setAttribute("height", canvasContainer.offsetHeight);
 
     // locate all the header elements and assign them their values
-    lives = document.querySelector("#lives .value");
-    lives.innerHTML = this.lives;
-    score = document.querySelector("#score .value");
-    score.innerHTML = this.score;
-    level = document.querySelector("#level .value");
-    level.innerHTML = this.level;
+    livesHTML = document.querySelector("#lives .value");
+    livesHTML.innerHTML = this.lives;
+    scoreHTML = document.querySelector("#score .value");
+    scoreHTML.innerHTML = this.score;
+    levelHTML = document.querySelector("#level .value");
+    levelHTML.innerHTML = this.level;
 
     // store the activeArea's element address
-    activeArea = document.querySelector("#active-area img");
+    // activeArea = document.querySelector("#active-area img");
 
     // call the main loop function
     this.mainLoop();
@@ -55,6 +55,8 @@ class Game {
       this.library.forEach((letter) => {
         letter.updatePosition();
         letter.draw();
+        if (letter.explosionCounter > 0) this.lives--;
+        if (letter.winCounter > 0) this.score++;
       });
 
       // we clean the letters array
@@ -92,5 +94,8 @@ class Game {
     this.library = cleanLibrary;
   }
 
-  updateStats() {}
+  updateStats() {
+    livesHTML.innerHTML = this.lives;
+    scoreHTML.innerHTML = this.score;
+  }
 }
