@@ -29,9 +29,9 @@ class Game {
     document.querySelector("#level .value").innerHTML = this.level;
 
     // we get the activeArea's heigth
-    this.activeArea = document.querySelector("#active-area img");
-    console.log(canvasContainer.offsetHeight);
-    console.log(this.activeArea.clientHeight);
+    this.activeArea =
+      canvasContainer.offsetHeight -
+      document.querySelector("#active-area img").offsetHeight;
 
     // we prepare the key stroke listener
     //document.body.addEventListener("keypress", handleKeyStrokes);
@@ -51,7 +51,7 @@ class Game {
       // we draw all the letters or explosions
       this.library.forEach((letter) => {
         letter.updatePosition();
-        letter.draw(400);
+        letter.draw(this.activeArea);
         if (letter.explosionCounter > 0) this.lives--;
         if (letter.winCounter > 0) this.score++;
       });
