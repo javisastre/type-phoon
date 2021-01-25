@@ -51,15 +51,18 @@ class Game {
       // we create one random letter per loop
       this.addLetter();
 
-      // we draw all the letters
+      // we draw all the letters or explosions
       this.library.forEach((letter) => {
         letter.updatePosition();
-        if (letter.y < 600) {
-          letter.draw();
-        } else {
-          letter.explode();
-        }
+        letter.draw();
       });
+
+      // we clean the letters array
+      this.cleanLetterArray();
+      console.log(this.library);
+
+      // we check the score and lives
+      this.updateStats();
 
       // we call the looper inside the looper
       window.requestAnimationFrame(loop);
@@ -76,4 +79,18 @@ class Game {
       this.library.push(letter);
     }
   }
+
+  cleanLetterArray() {
+    let cleanLibrary = this.library.filter((element) => {
+      if (element.explosionCounter <= 10) {
+        return element;
+      }
+      // if (element.winCounter <= 12) {
+      //   return element;
+      // }
+    });
+    this.library = cleanLibrary;
+  }
+
+  updateStats() {}
 }

@@ -5,6 +5,9 @@ class Letter {
     this.char = letters[idNum].char;
     this.normal = letters[idNum].normalImg;
     this.shiny = letters[idNum].shinyImg;
+    this.explosionCounter = 0;
+    this.win = false;
+    this.winCounter = 0;
     this.size = 60;
     this.x = Math.floor(Math.random() * canvas.offsetWidth) - this.size;
     this.y = -30;
@@ -16,8 +19,22 @@ class Letter {
   }
 
   draw() {
+    if (this.win === true) {
+      this.printImage(winAnimation[this.winCounter]);
+      this.winCounter++;
+    } else if (this.y <= 450) {
+      this.printImage(this.normal);
+    } else if (this.y > 450 && this.y < 700) {
+      this.printImage(this.shiny);
+    } else {
+      this.printImage(explosions[this.explosionCounter]);
+      this.explosionCounter++;
+    }
+  }
+
+  printImage(srcUrl) {
     const letterImage = new Image(this.size, this.size);
-    letterImage.src = this.normal;
+    letterImage.src = srcUrl;
     this.canvasContext.drawImage(
       letterImage,
       this.x,
@@ -25,19 +42,5 @@ class Letter {
       this.size,
       this.size
     );
-  }
-
-  explode() {
-    for (let i = 0; i < 10; i++) {
-      const explosionImage = new Image(this.size, this.size);
-      explosionImage.src = [i];
-      this.canvasContext.drawImage(
-        explosionImage,
-        this.x,
-        this.y,
-        this.size,
-        this.size
-      );
-    }
   }
 }

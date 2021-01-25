@@ -144,3 +144,18 @@ let explosions = [
   "../img/explosion/explosion9.png",
   "../img/explosion/explosion10.png",
 ];
+
+let winAnimation = [
+  "../img/1up/1ups01.png",
+  "../img/1up/1ups02.png",
+  "../img/1up/1ups03.png",
+  "../img/1up/1ups04.png",
+  "../img/1up/1ups05.png",
+  "../img/1up/1ups06.png",
+  "../img/1up/1ups07.png",
+  "../img/1up/1ups08.png",
+  "../img/1up/1ups09.png",
+  "../img/1up/1ups10.png",
+  "../img/1up/1ups11.png",
+  "../img/1up/1ups12.png",
+];
