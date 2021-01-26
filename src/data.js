@@ -158,4 +158,7 @@ let winAnimationArr = [
   "img/1up/1ups10.png",
   "img/1up/1ups11.png",
   "img/1up/1ups12.png",
+  "img/1up/1ups13.png",
+  "img/1up/1ups14.png",
+  "img/1up/1ups15.png",
 ];

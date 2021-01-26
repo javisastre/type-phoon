@@ -82,13 +82,11 @@ class Game {
 
   updateStats() {
     this.library.forEach((letter) => {
-      if (letter.win === true) {
+      if (letter.winCounter === 1) {
         this.score++;
-        letter.win = false;
       }
-      if (letter.explosion === true) {
+      if (letter.explosionCounter === 1) {
         this.lives--;
-        letter.explosion = false;
       }
     });
     if (this.lives <= 0) {
@@ -100,7 +98,7 @@ class Game {
 
   cleanLetterArray() {
     let cleanLibrary = this.library.filter((letter) => {
-      if (letter.explosion === false || letter.win === false) {
+      if (letter.explosionCounter < 9 || letter.winCounter < 14) {
         return letter;
       }
     });
@@ -111,7 +109,6 @@ class Game {
     this.library.forEach((letter) => {
       if (event.key.toUpperCase() === letter.char && letter.active === true) {
         letter.win = true;
-        letter.winAnimation = true;
       }
     });
   }
