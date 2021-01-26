@@ -68,3 +68,33 @@
   position: fixed;
   bottom: 0;
 }
+
+#gameover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#gameover > img {
+  margin-top: 5vh;
+  width: 35vw;
+  height: auto;
+}
+
+#gameover > .score {
+  font-family: "Permanent Marker", Arial, sans-serif;
+  color: #eeeeee;
+  font-size: 3rem;
+}
+
+#gameover button {
+  margin-top: 10vh;
+  width: 200;
+  height: 7vh;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Permanent Marker", Arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #172434;
+}

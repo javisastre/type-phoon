@@ -6,6 +6,7 @@ class Letter {
     this.normal = letters[idNum].normalImg;
     this.shiny = letters[idNum].shinyImg;
     this.active = false;
+    this.explosion = false;
     this.explosionCounter = 0;
     this.win = false;
     this.winCounter = 0;
@@ -32,6 +33,9 @@ class Letter {
     } else if (this.y > explosionLimit) {
       this.printImage(explosions[this.explosionCounter]);
       this.explosionCounter++;
+    }
+    if (this.explosionCounter >= 9) {
+      this.explosion = true;
     }
   }
 

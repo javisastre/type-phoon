@@ -69,18 +69,30 @@ function removeGameScreen() {
   gameScreen.remove();
 }
 
-function createGameOverScreen() {
+function createGameOverScreen(score) {
   gameOverScreen = buildDom(`
   <div id="gameOver">
-    <img
-      src="./img/GameOverScreenTitle.png"
-      alt="Game Over"
-      id="game-over-title"
-      />
-    <button>Try again?</button>
-  </div>`);
+  <img
+    src="./img/GameOverScreenTitle.png"
+    alt="Game Over"
+    id="game-over-title"
+  />
+  <span class="score">Your score: </span><span class="score" id="value">${score}</span>
+  <button>Try again?</button>
+</div>`);
   document.body.appendChild(gameOverScreen);
+
+  // we print the score of the last game
+  document.body.querySelector("#value").innerHTML = score;
+
+  // we set the background image
   setBackground("../img/GameOverScreenBg.jpg");
+
+  // we grab the button of the Game Over screen
+  const tryAgainButton = gameOverScreen.querySelector("button");
+
+  // we add an Event Listener to that button.
+  tryAgainButton.addEventListener("click", startGame);
 }
 
 function removeGameOverScreen() {
@@ -121,6 +133,12 @@ function loadGameImages() {
       }
     });
   });
+}
+
+function endGame(score) {
+  removeSplashScreen();
+  removeGameScreen();
+  createGameOverScreen(score);
 }
 
 window.addEventListener("load", createSplashScreen);

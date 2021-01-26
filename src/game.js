@@ -8,8 +8,9 @@ class Game {
     this.canvas = null;
     this.library = [];
     this.canvasContext = null;
-    this.gameIsOver = false;
     this.activeArea = undefined;
+    this.letterCreationSpeed = 0.96; // 0 crazy  -  0.99 easy
+    this.gameIsOver = false;
   }
 
   start() {
@@ -55,14 +56,16 @@ class Game {
         letter.draw(this.activeArea);
       });
 
-      // we clean the letters array
-      this.cleanLetterArray();
-
       // we check the score and lives
       this.updateStats();
 
-      // we call the looper inside the looper
-      window.requestAnimationFrame(loop);
+      // we clean the letters array
+      this.cleanLetterArray();
+
+      if (!this.gameIsOver) {
+        // we call the looper inside the looper
+        window.requestAnimationFrame(loop);
+      }
     };
 
     // we call the animation looper
@@ -70,36 +73,47 @@ class Game {
   }
 
   addLetter() {
-    if (Math.random() > 0.99) {
+    if (Math.random() > this.letterCreationSpeed) {
       const randomLetter = Math.floor(Math.random() * letters.length);
       const letter = new Letter(randomLetter, this.canvas);
       this.library.push(letter);
     }
   }
 
+  updateStats() {
+    this.library.forEach((letter) => {
+      if (letter.win === true) {
+        this.score++;
+      }
+      if (letter.explosion === true) {
+        this.lives--;
+      }
+    });
+    if (this.lives <= 0) {
+      this.gameOver();
+    }
+    document.querySelector("#lives .value").innerHTML = this.lives;
+    document.querySelector("#score .value").innerHTML = this.score;
+  }
+
   cleanLetterArray() {
     let cleanLibrary = this.library.filter((letter) => {
-      if (letter.explosionCounter <= 9) {
-        return letter;
-      }
-      if (letter.winCounter <= 11) {
+      if (letter.explosion === false || letter.win === false) {
         return letter;
       }
     });
     this.library = cleanLibrary;
   }
 
-  updateStats() {
-    document.querySelector("#lives .value").innerHTML = this.lives;
-    document.querySelector("#score .value").innerHTML = this.score;
-  }
-
   handleKeyStrokes(event) {
     this.library.forEach((letter) => {
       if (event.key.toUpperCase() === letter.char && letter.active === true) {
         letter.win = true;
-        this.score++;
       }
     });
+  }
+
+  gameOver() {
+    endGame(this.score);
   }
 }
