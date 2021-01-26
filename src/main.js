@@ -22,7 +22,7 @@ function createSplashScreen() {
   // we link the code to the body.
   document.body.appendChild(splashScreen);
   // we style the newly created splashScreen by sending the body as paramenter.
-  setBackground("../img/SplashScreenBg.jpg");
+  setBackground("img/SplashScreenBg.jpg");
   // we look for the start button on the recently created page
   const startButton = splashScreen.querySelector("button");
   // we add an Event Listener to that button.

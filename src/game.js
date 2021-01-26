@@ -105,7 +105,6 @@ class Game {
       }
     });
     this.library = cleanLibrary;
-    console.log(this.library);
   }
 
   handleKeyStrokes(event) {
