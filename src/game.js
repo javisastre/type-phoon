@@ -9,7 +9,7 @@ class Game {
     this.library = [];
     this.canvasContext = null;
     this.activeArea = undefined;
-    this.letterCreationSpeed = 0.95; // 0 crazy  -  0.99 easy
+    this.letterCreationSpeed = 0.99; // 0 crazy  -  0.99 easy
     this.gameIsOver = false;
   }
 
@@ -112,6 +112,7 @@ class Game {
     this.library.forEach((letter) => {
       if (event.key.toUpperCase() === letter.char && letter.active === true) {
         letter.win = true;
+        letter.winAnimation = true;
       }
     });
   }

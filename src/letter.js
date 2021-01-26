@@ -7,8 +7,10 @@ class Letter {
     this.shiny = letters[idNum].shinyImg;
     this.active = false;
     this.explosion = false;
+    this.explosionAnimation = false;
     this.explosionCounter = 0;
     this.win = false;
+    this.winAnimation = false;
     this.winCounter = 0;
     this.size = 60;
     this.x = Math.floor(Math.random() * canvas.offsetWidth) - this.size;
@@ -22,8 +24,8 @@ class Letter {
 
   draw(activeHeigth) {
     const explosionLimit = activeHeigth + (activeHeigth * 3) / 4;
-    if (this.win === true) {
-      this.printImage(winAnimation[this.winCounter]);
+    if (this.winAnimation === true) {
+      this.printImage(winAnimationArr[this.winCounter]);
       this.winCounter++;
     } else if (this.y <= activeHeigth) {
       this.printImage(this.normal);
@@ -31,11 +33,11 @@ class Letter {
       this.active = true;
       this.printImage(this.shiny);
     } else if (this.y > explosionLimit) {
-      this.printImage(explosions[this.explosionCounter]);
+      this.printImage(explosionAnimationArr[this.explosionCounter]);
       this.explosionCounter++;
-    }
-    if (this.explosionCounter >= 9) {
-      this.explosion = true;
+      if (this.explosionCounter >= 9) {
+        this.explosionCounter = 9;
+      }
     }
   }
 

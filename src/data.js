@@ -131,7 +131,7 @@ let letters = [
   },
 ];
 
-let explosions = [
+let explosionAnimationArr = [
   "img/explosion/explosion1.png",
   "img/explosion/explosion2.png",
   "img/explosion/explosion3.png",
@@ -145,7 +145,7 @@ let explosions = [
   "img/explosion/explosion10.png",
 ];
 
-let winAnimation = [
+let winAnimationArr = [
   "img/1up/1ups01.png",
   "img/1up/1ups02.png",
   "img/1up/1ups03.png",
