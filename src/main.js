@@ -105,6 +105,7 @@ function setBackground(backgroundUrl) {
 
 function loadGameImages() {
   const allImages = gameScreen.querySelectorAll("img");
+  //console.log(allImages);
   const totalImages = allImages.length;
   let loadedImages = 0;
 

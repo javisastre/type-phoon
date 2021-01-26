@@ -2,7 +2,7 @@
 
 class Game {
   constructor() {
-    this.lives = 100;
+    this.lives = 20;
     this.score = 0;
     this.level = 1;
     this.canvas = null;
@@ -33,8 +33,9 @@ class Game {
       canvasContainer.offsetHeight -
       document.querySelector("#active-area img").offsetHeight;
 
-    // we prepare the key stroke listener
-    //document.body.addEventListener("keypress", handleKeyStrokes);
+    // we activate the key stroke listener
+    const boundedHandleKeyStrokes = this.handleKeyStrokes.bind(this);
+    document.body.addEventListener("keypress", boundedHandleKeyStrokes);
 
     // call the main loop function
     this.mainLoop();
@@ -52,8 +53,6 @@ class Game {
       this.library.forEach((letter) => {
         letter.updatePosition();
         letter.draw(this.activeArea);
-        if (letter.explosionCounter > 0) this.lives--;
-        if (letter.winCounter > 0) this.score++;
       });
 
       // we clean the letters array
@@ -71,7 +70,7 @@ class Game {
   }
 
   addLetter() {
-    if (Math.random() > 0.9) {
+    if (Math.random() > 0.99) {
       const randomLetter = Math.floor(Math.random() * letters.length);
       const letter = new Letter(randomLetter, this.canvas);
       this.library.push(letter);
@@ -79,12 +78,12 @@ class Game {
   }
 
   cleanLetterArray() {
-    let cleanLibrary = this.library.filter((element) => {
-      if (element.explosionCounter <= 10) {
-        return element;
+    let cleanLibrary = this.library.filter((letter) => {
+      if (letter.explosionCounter <= 9) {
+        return letter;
       }
-      if (element.winCounter <= 11) {
-        return element;
+      if (letter.winCounter <= 11) {
+        return letter;
       }
     });
     this.library = cleanLibrary;
@@ -95,5 +94,12 @@ class Game {
     document.querySelector("#score .value").innerHTML = this.score;
   }
 
-  handleKeyStrokes() {}
+  handleKeyStrokes(event) {
+    this.library.forEach((letter) => {
+      if (event.key.toUpperCase() === letter.char && letter.active === true) {
+        letter.win = true;
+        this.score++;
+      }
+    });
+  }
 }
