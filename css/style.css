@@ -1,5 +1,6 @@
-* {
+body {
   margin: 0;
+  padding: 0;
 }
 
 #splash {
@@ -18,9 +19,9 @@
 
 #splash button {
   width: 200;
-  height: 20%;
+  height: 7vh;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   font-family: "Permanent Marker", Arial, sans-serif;
   background-color: rgba(255, 255, 255, 0.6);

@@ -1,7 +1,7 @@
 let letters = [
   {
     char: "A",
-    normalImg: "../img/letters/a.png",
+    normalImg: "img/letters/a.png",
     shinyImg: "../img/letters/a-shiny.png",
   },
   {

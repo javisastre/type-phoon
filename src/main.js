@@ -142,3 +142,4 @@ function endGame(score) {
 }
 
 window.addEventListener("load", createSplashScreen);
+//window.addEventListener("load", createGameScreen);

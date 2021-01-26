@@ -9,7 +9,7 @@ class Game {
     this.library = [];
     this.canvasContext = null;
     this.activeArea = undefined;
-    this.letterCreationSpeed = 0.96; // 0 crazy  -  0.99 easy
+    this.letterCreationSpeed = 0.95; // 0 crazy  -  0.99 easy
     this.gameIsOver = false;
   }
 
@@ -84,9 +84,11 @@ class Game {
     this.library.forEach((letter) => {
       if (letter.win === true) {
         this.score++;
+        letter.win = false;
       }
       if (letter.explosion === true) {
         this.lives--;
+        letter.explosion = false;
       }
     });
     if (this.lives <= 0) {
@@ -103,6 +105,7 @@ class Game {
       }
     });
     this.library = cleanLibrary;
+    console.log(this.library);
   }
 
   handleKeyStrokes(event) {
