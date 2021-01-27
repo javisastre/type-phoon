@@ -6,6 +6,7 @@ class Letter {
     this.normal = letters[idNum].normalImg;
     this.shiny = letters[idNum].shinyImg;
     this.active = false;
+    this.explosion = false;
     this.explosionCounter = 0;
     this.win = false;
     this.winCounter = 0;
@@ -24,23 +25,33 @@ class Letter {
     const explosionLimit = activeHeigth + (activeHeigth * 3) / 4;
 
     // 4 conditions for the letter to be drawn
-    // 1. the letter reaches the explosion limit. Explosion animation starts
-    if (this.y > explosionLimit && this.win === false) {
-      this.printImage(explosionAnimationArr[this.explosionCounter]);
-      this.explosionCounter++;
-      // 2. the letter was pressed and score went up. Win animation starts
-    } else if (this.win === true) {
-      this.printImage(winAnimationArr[this.winCounter]);
-      this.winCounter++;
+    const exploded = this.win === false && this.y > explosionLimit;
+    const won = this.win === true && this.explosion === false;
+    const normalLetter = this.y <= activeHeigth && !exploded && !won;
+    const shinyLetter =
+      this.y > activeHeigth &&
+      this.y < explosionLimit &&
+      this.win === false &&
+      this.explosion === false;
 
-      // 3. the letter is before the active area. Print normal letter.
-    } else if (this.y <= activeHeigth) {
-      this.printImage(this.normal);
-
-      // the letter is on the active area. Print shiny letter.
-    } else if (this.y > activeHeigth && this.y <= explosionLimit) {
-      this.active = true;
-      this.printImage(this.shiny);
+    // We check what's the situation
+    switch (true) {
+      case exploded:
+        this.printImage(explosionAnimationArr[this.explosionCounter]);
+        this.explosionCounter++;
+        this.explosion = true;
+        break;
+      case won:
+        this.printImage(winAnimationArr[this.winCounter]);
+        this.winCounter++;
+        break;
+      case normalLetter:
+        this.printImage(this.normal);
+        break;
+      case shinyLetter:
+        this.active = true;
+        this.printImage(this.shiny);
+        break;
     }
   }
 

@@ -7,13 +7,6 @@ let gameScreen;
 let gameOverScreen;
 let game;
 
-function playBackgroundAudio() {
-  const wind = document.querySelector("#wind");
-  wind.currentTime = 0;
-  wind.play();
-  wind.loop = true;
-}
-
 function buildDom(htmlCode) {
   const div = document.createElement("div");
   div.innerHTML = htmlCode;
@@ -33,13 +26,12 @@ function createPreSplashScreen() {
 
 function loadSplashScreen() {
   preSplashScreen.remove();
+  // play background sound
+  playBackgroundAudio();
   createSplashScreen();
 }
 
 function createSplashScreen() {
-  // play background sound
-  playBackgroundAudio();
-
   // we insert the code in the index.html file
   splashScreen = buildDom(`
     <div id="splash">
@@ -119,7 +111,6 @@ function createGameScreen() {
       </div>
   </div>`);
   document.body.appendChild(gameScreen);
-  setBackground("img/Background1.jpg");
 }
 
 function removeGameScreen() {
@@ -170,13 +161,6 @@ function loadInfo() {
   createInfoScreen();
 }
 
-function setBackground(backgroundUrl) {
-  document.body.style.backgroundImage = `url(${backgroundUrl})`;
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundPosition = "bottom center";
-}
-
 function loadGameImages() {
   const allImages = gameScreen.querySelectorAll("img");
   const totalImages = allImages.length;
@@ -201,6 +185,28 @@ function endGame(score) {
   removeSplashScreen();
   removeGameScreen();
   createGameOverScreen(score);
+}
+function setBackground(backgroundUrl) {
+  document.body.style.backgroundImage = `url(${backgroundUrl})`;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundPosition = "bottom center";
+}
+
+function setBackgroundInGame(backgroundUrl) {
+  document.body.style.backgroundImage = `url(${backgroundUrl})`;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundPosition = "bottom center";
+  
+  
+}
+
+function playBackgroundAudio() {
+  const wind = document.querySelector("#wind");
+  wind.currentTime = 0;
+  wind.play();
+  wind.loop = true;
 }
 
 window.addEventListener("load", createPreSplashScreen);

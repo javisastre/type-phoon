@@ -12,7 +12,7 @@ class Game {
     this.library = [];
     this.canvasContext = null;
     this.activeArea = undefined;
-    this.letterCreationSpeed = 0.97; // 0 crazy  -  0.99 easy
+    this.letterCreationSpeed = 0;
     this.gameIsOver = false;
   }
 
@@ -42,6 +42,25 @@ class Game {
     document.body.addEventListener("keypress", boundedHandleKeyStrokes);
 
     // call the main loop function
+    this.levelManager();
+  }
+
+  levelManager() {
+    switch (!this.gameIsOver) {
+      case this.level === 1:
+        this.letterCreationSpeed = 0.99;
+        buildDom(`
+        <div id = "level-mark">
+          <img src="img/SplashScreenTitle.png" alt="Level1">
+        </div>
+        `);
+        setBackgroundInGame("img/Background1.jpg");
+        break;
+      case this.level === 2:
+        this.letterCreationSpeed = 0.98;
+        setBackgroundInGame("img/Background2.jpg");
+        break;
+    }
     this.mainLoop();
   }
 

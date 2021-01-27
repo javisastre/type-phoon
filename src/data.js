@@ -145,7 +145,7 @@ let explosionAnimationArr = [
   "img/explosion/explosion10.png",
 ];
 
-let winAnimationArr = [
+const winAnimationArr = [
   "img/1up/1ups01.png",
   "img/1up/1ups02.png",
   "img/1up/1ups03.png",

@@ -18,6 +18,10 @@ body {
   animation: windy 2s infinite;
 }
 
+.animated  {
+  animation: windy 2s infinite;
+}
+
 @keyframes windy {
   0% {
     transform: translatex(0px);
@@ -160,4 +164,10 @@ button:focus {
   background-color: #172434;
   color: #eeeeee;
   font-weight: 300;
+}
+
+#level-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
