@@ -2,6 +2,10 @@
 
 const correctAudio = document.querySelector("#correct");
 const errorAudio = document.querySelector("#error");
+const newLevelAudio = document.querySelector("#new-level");
+const wrongInputAudio = document.querySelector("#wrong-input");
+
+let level1, level2, level3, level4, level5;
 
 class Game {
   constructor() {
@@ -14,6 +18,7 @@ class Game {
     this.activeArea = undefined;
     this.letterCreationSpeed = 0;
     this.gameIsOver = false;
+    this.levelChange = false;
   }
 
   start() {
@@ -46,22 +51,48 @@ class Game {
   }
 
   levelManager() {
+    setTimeout(() => {
+      this.levelChange = true;
+    }, 20000);
+
+    this.library = [];
+    this.buildLevelDoms();
+    newLevelAudio.currentTime = 0;
+    newLevelAudio.play();
+
     switch (!this.gameIsOver) {
       case this.level === 1:
         this.letterCreationSpeed = 0.99;
-        buildDom(`
-        <div id = "level-mark">
-          <img src="img/SplashScreenTitle.png" alt="Level1">
-        </div>
-        `);
+        document.body.appendChild(level1);
         setBackgroundInGame("img/Background1.jpg");
         break;
       case this.level === 2:
         this.letterCreationSpeed = 0.98;
+        document.body.appendChild(level2);
         setBackgroundInGame("img/Background2.jpg");
         break;
+      case this.level === 3:
+        this.letterCreationSpeed = 0.97;
+        document.body.appendChild(level3);
+        setBackgroundInGame("img/Background3.jpg");
+        break;
+      case this.level === 4:
+        this.letterCreationSpeed = 0.96;
+        document.body.appendChild(level4);
+        setBackgroundInGame("img/Background4.jpg");
+        break;
+      case this.level === 5:
+        this.letterCreationSpeed = 0.95;
+        document.body.appendChild(level5);
+        setBackgroundInGame("img/Background5.jpg");
+        break;
     }
-    this.mainLoop();
+    setTimeout(() => {
+      level1.remove();
+      level2.remove();
+      level3.remove();
+      this.mainLoop();
+    }, 2000);
   }
 
   mainLoop() {
@@ -84,7 +115,11 @@ class Game {
       // we clean the letters array
       this.cleanLetterArray();
 
-      if (!this.gameIsOver) {
+      if (this.levelChange) {
+        this.level++;
+        this.levelChange = false;
+        this.levelManager();
+      } else if (!this.gameIsOver) {
         // we call the looper inside the looper
         window.requestAnimationFrame(loop);
       }
@@ -120,6 +155,7 @@ class Game {
     }
     document.querySelector("#lives .value").innerHTML = this.lives;
     document.querySelector("#score .value").innerHTML = this.score;
+    document.querySelector("#level .value").innerHTML = this.level;
   }
 
   cleanLetterArray() {
@@ -136,10 +172,42 @@ class Game {
       if (event.key.toUpperCase() === letter.char && letter.active === true) {
         letter.win = true;
       }
+      if (event.key.toUpperCase() === letter.char && letter.active === false) {
+        wrongInputAudio.currentTime = 0;
+        wrongInputAudio.play();
+      }
     });
   }
 
   gameOver() {
     endGame(this.score);
+  }
+
+  buildLevelDoms() {
+    level1 = buildDom(`
+    <div id = "level-mark">
+      <img src="img/levels/Level1.png" alt="Level1">
+    </div>
+    `);
+    level2 = buildDom(`
+    <div id = "level-mark">
+      <img src="img/levels/Level2.png" alt="Level2">
+    </div>
+    `);
+    level3 = buildDom(`
+        <div id = "level-mark">
+          <img src="img/levels/Level3.png" alt="Level3">
+        </div>
+        `);
+    level4 = buildDom(`
+        <div id = "level-mark">
+          <img src="img/levels/Level4.png" alt="Level4">
+        </div>
+        `);
+    level5 = buildDom(`
+        <div id = "level-mark">
+          <img src="img/levels/Level5.png" alt="Level5">
+        </div>
+        `);
   }
 }
