@@ -110,7 +110,7 @@ button:focus {
   width: 100vw;
   height: 95vh;
   position: absolute;
-  z-index: 100;
+  z-index: 5;
 }
 
 #active-area img {
@@ -188,4 +188,24 @@ button:focus {
   100% {
     transform: scale(0.7);
   }
+}
+
+@keyframes background-movement {
+  0% {
+    background-position: vw;
+  }
+
+  100% {
+    background-position: 5vw;
+  }
+}
+
+#background1 {
+  top: 0px;
+  height: 100vh;
+  width: auto;
+  object-fit: contain;
+  animation: background-movement 20s infinite;
+  position: absolute;
+  z-index: -10;
 }

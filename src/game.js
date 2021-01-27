@@ -64,6 +64,10 @@ class Game {
       case this.level === 1:
         this.letterCreationSpeed = 0.99;
         document.body.appendChild(level1);
+        let back = buildDom(`
+        <img src="img/Background1.jpg" alt="" id = "background1">
+        `);
+        //document.body.appendChild(back);
         setBackgroundInGame("img/Background1.jpg");
         break;
       case this.level === 2:
