@@ -24,12 +24,16 @@ class Letter {
     const explosionLimit = activeHeigth + (activeHeigth * 3) / 4;
 
     // 4 conditions for the letter to be drawn
-    // 1. the letter was pressed and score went up. Win animation starts
-    if (this.win === true) {
+    // 1. the letter reaches the explosion limit. Explosion animation starts
+    if (this.y > explosionLimit && this.win === false) {
+      this.printImage(explosionAnimationArr[this.explosionCounter]);
+      this.explosionCounter++;
+      // 2. the letter was pressed and score went up. Win animation starts
+    } else if (this.win === true) {
       this.printImage(winAnimationArr[this.winCounter]);
       this.winCounter++;
 
-      // the letter is before the active area. Print normal letter.
+      // 3. the letter is before the active area. Print normal letter.
     } else if (this.y <= activeHeigth) {
       this.printImage(this.normal);
 
@@ -37,11 +41,6 @@ class Letter {
     } else if (this.y > activeHeigth && this.y <= explosionLimit) {
       this.active = true;
       this.printImage(this.shiny);
-
-      // the letter reaches the explosion limit. Explosion animation starts
-    } else if (this.y > explosionLimit) {
-      this.printImage(explosionAnimationArr[this.explosionCounter]);
-      this.explosionCounter++;
     }
   }
 

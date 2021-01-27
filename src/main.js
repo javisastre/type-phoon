@@ -1,9 +1,18 @@
 "use strict";
 
+let preSplashScreen;
 let splashScreen;
+let infoScreen;
 let gameScreen;
 let gameOverScreen;
 let game;
+
+function playBackgroundAudio() {
+  const wind = document.querySelector("#wind");
+  wind.currentTime = 0;
+  wind.play();
+  wind.loop = true;
+}
 
 function buildDom(htmlCode) {
   const div = document.createElement("div");
@@ -11,26 +20,74 @@ function buildDom(htmlCode) {
   return div.children[0];
 }
 
+function createPreSplashScreen() {
+  preSplashScreen = buildDom(`
+  <div id = "preSplash">
+  <button >Start Type-Phoon Game</button>
+  </div>
+  `);
+  document.body.appendChild(preSplashScreen);
+  const preStartButton = document.querySelector("#preSplash");
+  preStartButton.addEventListener("click", loadSplashScreen);
+}
+
+function loadSplashScreen() {
+  preSplashScreen.remove();
+  createSplashScreen();
+}
+
 function createSplashScreen() {
+  // play background sound
+  playBackgroundAudio();
+
   // we insert the code in the index.html file
   splashScreen = buildDom(`
     <div id="splash">
       <img src="img/SplashScreenTitle.png" alt="Type-phoon" id ="game-title">
-      <button>Start Game</button>
+      <nav>
+        <button id = "start">Start Game</button>
+        <button id = "info">How to play?</button>
+      </nav>
     </div>
     `);
   // we link the code to the body.
   document.body.appendChild(splashScreen);
   // we style the newly created splashScreen by sending the body as paramenter.
   setBackground("img/SplashScreenBg.jpg");
-  // we look for the start button on the recently created page
-  const startButton = splashScreen.querySelector("button");
+  // we look for the buttons on the recently created page
+  const startButton = splashScreen.querySelector("#start");
+  const infoButton = splashScreen.querySelector("#info");
+
   // we add an Event Listener to that button.
   startButton.addEventListener("click", startGame);
+  infoButton.addEventListener("click", loadInfo);
 }
 
 function removeSplashScreen() {
   splashScreen.remove();
+}
+
+function createInfoScreen() {
+  infoScreen = buildDom(`
+<div id="info-screen">
+  <img src="img/InfoScreenTitle.png" alt="Info" id ="info-title">
+  <span>Use your keyboard to increase your score!</span>
+  <button id = "back">Go Back</button>
+</div>
+`);
+  document.body.appendChild(infoScreen);
+
+  // we set the background for info-screen
+  setBackground("img/InfoScreenBg.jpg");
+
+  // we look for the button and add an event listener
+  const backButton = infoScreen.querySelector("#back");
+  backButton.addEventListener("click", removeInfoScreen);
+}
+
+function removeInfoScreen() {
+  infoScreen.remove();
+  createSplashScreen();
 }
 
 function createGameScreen() {
@@ -108,6 +165,11 @@ function startGame() {
   loadGameImages();
 }
 
+function loadInfo() {
+  removeSplashScreen();
+  createInfoScreen();
+}
+
 function setBackground(backgroundUrl) {
   document.body.style.backgroundImage = `url(${backgroundUrl})`;
   document.body.style.backgroundSize = "cover";
@@ -117,7 +179,6 @@ function setBackground(backgroundUrl) {
 
 function loadGameImages() {
   const allImages = gameScreen.querySelectorAll("img");
-  //console.log(allImages);
   const totalImages = allImages.length;
   let loadedImages = 0;
 
@@ -127,6 +188,7 @@ function loadGameImages() {
       const allImagesLoaded = loadedImages === totalImages;
       if (allImagesLoaded) {
         // we create a new instance of the Game class
+
         game = new Game();
         // we launch the game with its start method
         game.start();
@@ -141,4 +203,4 @@ function endGame(score) {
   createGameOverScreen(score);
 }
 
-window.addEventListener("load", createSplashScreen);
+window.addEventListener("load", createPreSplashScreen);

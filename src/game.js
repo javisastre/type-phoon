@@ -1,5 +1,8 @@
 "use strict";
 
+const correctAudio = document.querySelector("#correct");
+const errorAudio = document.querySelector("#error");
+
 class Game {
   constructor() {
     this.lives = 20;
@@ -9,7 +12,7 @@ class Game {
     this.library = [];
     this.canvasContext = null;
     this.activeArea = undefined;
-    this.letterCreationSpeed = 0.99; // 0 crazy  -  0.99 easy
+    this.letterCreationSpeed = 0.97; // 0 crazy  -  0.99 easy
     this.gameIsOver = false;
   }
 
@@ -84,9 +87,13 @@ class Game {
     this.library.forEach((letter) => {
       if (letter.winCounter === 1) {
         this.score++;
+        correctAudio.currentTime = 0;
+        correctAudio.play();
       }
       if (letter.explosionCounter === 1) {
         this.lives--;
+        errorAudio.currentTime = 0;
+        errorAudio.play();
       }
     });
     if (this.lives <= 0) {

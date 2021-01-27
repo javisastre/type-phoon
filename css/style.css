@@ -6,7 +6,7 @@ body {
 #splash {
   width: 30vw;
   height: auto;
-  margin: 10vh auto auto 20vw;
+  margin: 10vh auto 0 20vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,17 +15,63 @@ body {
 #splash img {
   width: 100%;
   height: auto;
+  animation: windy 2s infinite;
 }
 
-#splash button {
+@keyframes windy {
+  0% {
+    transform: translatex(0px);
+  }
+  5% {
+    transform: translatex(-10px);
+  }
+  10% {
+    transform: translatex(10px);
+  }
+  20% {
+    transform: translatex(-10px);
+  }
+  30% {
+    transform: translatex(50px);
+  }
+  40% {
+    transform: translatex(-10px);
+  }
+  50% {
+    transform: translatex(-20px);
+  }
+  60% {
+    transform: translatex(10px);
+  }
+  100% {
+    transform: translatex(0px);
+  }
+}
+
+button {
+  margin-top: 10vh;
   width: 200;
   height: 7vh;
   border-radius: 10px;
   font-size: 1.5rem;
   font-weight: 600;
   font-family: "Permanent Marker", Arial, sans-serif;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   color: #172434;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+#splash nav {
+  display: flex;
 }
 
 #game header {
@@ -80,6 +126,7 @@ body {
   margin-top: 5vh;
   width: 35vw;
   height: auto;
+  animation: windy 2s infinite;
 }
 
 #gameover > .score {
@@ -88,14 +135,29 @@ body {
   font-size: 3rem;
 }
 
-#gameover button {
-  margin-top: 10vh;
-  width: 200;
-  height: 7vh;
-  border-radius: 10px;
-  font-size: 1.5rem;
-  font-weight: 600;
+#info-screen {
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  color: #eeeeee;
+  font-weight: 300;
   font-family: "Permanent Marker", Arial, sans-serif;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #172434;
+}
+
+#preSplash {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#preSplash button {
+  width: 30vw;
+  text-align: center;
+  background-color: #172434;
+  color: #eeeeee;
+  font-weight: 300;
 }
