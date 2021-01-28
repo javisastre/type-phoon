@@ -1,11 +1,7 @@
 "use strict";
 
-let preSplashScreen;
-let splashScreen;
-let infoScreen;
-let gameScreen;
-let gameOverScreen;
-let game;
+let preSplashScreen, splashScreen, infoScreen, gameScreen, gameOverScreen, game;
+const cowSound = document.querySelector("#cow-sound");
 
 function buildDom(htmlCode) {
   const div = document.createElement("div");
@@ -43,7 +39,7 @@ function createSplashScreen() {
         <button id = "info">How to play?</button>
       </nav>
     </div>
-    <img src="img/SplashScreenTitle.png" alt="Flying cow" id ="cow">
+    <img src="img/cow.png" alt="Flying cow" id ="cow">
     </div>
     `);
   // we link the code to the body.
@@ -52,6 +48,13 @@ function createSplashScreen() {
   // we look for the buttons on the recently created page
   const startButton = splashScreen.querySelector("#start");
   const infoButton = splashScreen.querySelector("#info");
+
+  // we set the cow's animation in here
+  setTimeout(() => {
+    splashScreen.querySelector("#cow").setAttribute("class", "moo");
+    cowSound.currentTime = 0;
+    cowSound.play();
+  }, 4000);
 
   // we add an Event Listener to that button.
   startButton.addEventListener("click", startGame);

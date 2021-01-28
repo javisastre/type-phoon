@@ -269,3 +269,26 @@ button:focus {
     background-position-x: -100px;
   }
 }
+
+#cow {
+  position: absolute;
+  left: -100px;
+}
+
+.moo {
+  animation: cow-animation 2s 1;
+  animation-timing-function: linear;
+}
+
+@keyframes cow-animation {
+  from {
+    left: -100px;
+    bottom: 170px;
+    transform: rotate(0deg);
+  }
+  to {
+    left: 100vw;
+    bottom: 100vh;
+    transform: rotate(400deg);
+  }
+}
