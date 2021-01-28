@@ -43,6 +43,7 @@ function createSplashScreen() {
         <button id = "info">How to play?</button>
       </nav>
     </div>
+    <img src="img/SplashScreenTitle.png" alt="Flying cow" id ="cow">
     </div>
     `);
   // we link the code to the body.

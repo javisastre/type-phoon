@@ -4,7 +4,7 @@
 
 A hurricane of letters is coming your way! Luckily, your keyboard will help you block the typography impacts!
 
-A Guitar Hero-like, key stroke sensitive shooter game to practice your typing skills. The object of the game is to get as many points as possible by pressing the corresponding key to the incoming letters.
+A Guitar Hero-like, key stroke sensitive, letter shooter game to practice your typing skills. The object of the game is to get as many points as possible by pressing the corresponding key to the incoming letters.
 Video game developed at IronHack WebDev bootcamp (Module 1 Project)
 
 
@@ -19,31 +19,54 @@ index.html
 main.js
 game.js
 letter.js
-lane.js
-activeArea.js
-background.js
+data.js
 
 ### index.html
 
-- loads the main.js script
+- loads the JavaScript files
+- loads the audios
+- connects the stylesheet document
 
 ### main.js
 
-- buildDom
-- createStartScreen / removeStartScreen
+- createPreSplashScreen
+- loadSplashScreen
+- removeSplashScreen / removeSplashScreen
+- createInfoScreen / removeInfoScreen
 - createGameScreen / removeGameScreen
 - createGameOverScreen / removeGameOverScreen
 - startGame
+- loadInfo
+- loadGameImages
+- endGame
+- playBackgroundAudio
+- buildDom
 
 ### game.js
 
+- constructor
+- start
+- levelManager
+- mainLoop
+- addLetter
+- updateStats
+- cleanLetterArray
+- handleKeyStrokes
+- gameOver
+- buildLevelDoms
+
 ### letter.js
 
-### lane.js
+- constructor
+- updatePosition
+- draw
+- printImage
 
-### activeArea.js
+### data.js
 
-### background.js
+- letters array
+- explosion animation array
+- win animation array
 
 
 # States y States Transitions
@@ -52,13 +75,22 @@ Definition of the different states and their transition (transition functions)
 
 ## startScreen
 
-- load background image, title and start button.
+- load background image, title, start and How to play button.
 - run gameScreen when Start button is clicked.
+- load infoScreen when How to play button is clicked.
+
+## infoScreen
+
+  - load background image, contents and go back button.
+  - return to startScreen when back button is clicked.
 
 ## gameScreen
 
 - run the Game if lives are > 0.
 - when lifes <= 0, load gameOverScreen.
+- levels increase after certain time
+- letter speed increases with each level
+- background image changes in each level
 
 ## gameoverScreen
 
@@ -73,17 +105,18 @@ Definition of the different states and their transition (transition functions)
 - key stroke recognition.
 - letters falling printing in a 2D environment.
 - limit the active area.
-- several letter lanes implementation.
 - shining letter animation.
-- scores and lives
-- difficulty levels implementation.
+- explosion animation when failed to press the correct key
+- win animation when the keystroke is correct
+- scores and lives implementation
+- difficulty levels implementation
+- background animation
 
 
 
 # Backlog
 
 - 3D-like visual implementation of the letters.
-- background implementation.
 - background shakes on each impact.
 
 
@@ -100,10 +133,10 @@ Definition of the different states and their transition (transition functions)
 
 URls for the project repo and deploy
 [Link Repo](https://github.com/javisastre/module1project1-type-phoon)
-[Link Deploy](http://github.com) // not set yet
+[Link Deploy](https://javisastre.github.io/type-phoon/) /
 
 
 ### Slides
 
 URls for the project presentation (slides)
-[Link Slides.com](http://slides.com)
+[Link Slides.com](https://docs.google.com/presentation/d/1oMvPSj70rhTfMxRFtyGQVa-A1a8S-Siy-Q3VY4E4XFI/edit?usp=sharing)
