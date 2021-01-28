@@ -35,6 +35,7 @@ function loadSplashScreen() {
 function createSplashScreen() {
   // we insert the code in the index.html file
   splashScreen = buildDom(`
+  <div id = "splash-container">
     <div id="splash">
       <img src="img/SplashScreenTitle.png" alt="Type-phoon" id ="game-title">
       <nav>
@@ -42,11 +43,11 @@ function createSplashScreen() {
         <button id = "info">How to play?</button>
       </nav>
     </div>
+    </div>
     `);
   // we link the code to the body.
   document.body.appendChild(splashScreen);
-  // we style the newly created splashScreen by sending the body as paramenter.
-  setBackground("img/SplashScreenBg.jpg");
+
   // we look for the buttons on the recently created page
   const startButton = splashScreen.querySelector("#start");
   const infoButton = splashScreen.querySelector("#info");
@@ -62,16 +63,15 @@ function removeSplashScreen() {
 
 function createInfoScreen() {
   infoScreen = buildDom(`
+  <div id="info-screen-container">
 <div id="info-screen">
   <img src="img/InfoScreenTitle.png" alt="Info" id ="info-title">
   <span>Use your keyboard to increase your score!</span>
   <button id = "back">Go Back</button>
 </div>
+</div>
 `);
   document.body.appendChild(infoScreen);
-
-  // we set the background for info-screen
-  setBackground("img/InfoScreenBg.jpg");
 
   // we look for the button and add an event listener
   const backButton = infoScreen.querySelector("#back");
@@ -120,7 +120,8 @@ function removeGameScreen() {
 
 function createGameOverScreen(score) {
   gameOverScreen = buildDom(`
-  <div id="gameOver">
+  <div id="gameover-container">
+  <div id="gameover">
   <img
     src="img/GameOverScreenTitle.png"
     alt="Game Over"
@@ -128,14 +129,13 @@ function createGameOverScreen(score) {
   />
   <span class="score">Your score: </span><span class="score" id="value">${score}</span>
   <button>Try again?</button>
-</div>`);
+  </div>
+</div>
+`);
   document.body.appendChild(gameOverScreen);
 
   // we print the score of the last game
   document.body.querySelector("#value").innerHTML = score;
-
-  // we set the background image
-  setBackground("img/GameOverScreenBg.jpg");
 
   // we grab the button of the Game Over screen
   const tryAgainButton = gameOverScreen.querySelector("button");
@@ -173,7 +173,6 @@ function loadGameImages() {
       const allImagesLoaded = loadedImages === totalImages;
       if (allImagesLoaded) {
         // we create a new instance of the Game class
-
         game = new Game();
         // we launch the game with its start method
         game.start();
@@ -186,19 +185,6 @@ function endGame(score) {
   removeSplashScreen();
   removeGameScreen();
   createGameOverScreen(score);
-}
-function setBackground(backgroundUrl) {
-  document.body.style.backgroundImage = `url(${backgroundUrl})`;
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundPosition = "bottom center";
-}
-
-function setBackgroundInGame(backgroundUrl) {
-  document.body.style.backgroundImage = `url(${backgroundUrl})`;
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundPosition = "bottom center";
 }
 
 function playBackgroundAudio() {

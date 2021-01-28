@@ -190,22 +190,82 @@ button:focus {
   }
 }
 
-@keyframes background-movement {
-  0% {
-    background-position: vw;
-  }
-
-  100% {
-    background-position: 5vw;
-  }
+#splash-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/SplashScreenBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: bottom center;
 }
 
-#background1 {
-  top: 0px;
+#info-screen-container {
+  width: 100vw;
   height: 100vh;
-  width: auto;
-  object-fit: contain;
-  animation: background-movement 20s infinite;
+  background-image: url("../img/InfoScreenBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   position: absolute;
-  z-index: -10;
+  background-position: bottom center;
+}
+
+#gameover-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/GameOverScreenBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: bottom center;
+}
+
+.level1 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/Background1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: background-movement 22s infinite;
+}
+.level2 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/Background2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: background-movement 22s infinite;
+}
+.level3 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/Background3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: background-movement 22s infinite;
+}
+.level4 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/Background4.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: background-movement 22s infinite;
+}
+.level5 {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../img/Background5.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: background-movement 22s infinite;
+}
+
+@keyframes background-movement {
+  0% {
+    background-position-x: 0px;
+  }
+  100% {
+    background-position-x: -100px;
+  }
 }

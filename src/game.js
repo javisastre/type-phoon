@@ -4,7 +4,6 @@ const correctAudio = document.querySelector("#correct");
 const errorAudio = document.querySelector("#error");
 const newLevelAudio = document.querySelector("#new-level");
 const wrongInputAudio = document.querySelector("#wrong-input");
-
 let level1, level2, level3, level4, level5;
 
 class Game {
@@ -17,6 +16,7 @@ class Game {
     this.canvasContext = null;
     this.activeArea = undefined;
     this.letterCreationSpeed = 0;
+    this.levelTimeInSeconds = 20;
     this.gameIsOver = false;
     this.levelChange = false;
   }
@@ -51,44 +51,48 @@ class Game {
   }
 
   levelManager() {
+    // we start the level timer
     setTimeout(() => {
       this.levelChange = true;
-    }, 20000);
+    }, this.levelTimeInSeconds * 1000);
 
     this.library = [];
     this.buildLevelDoms();
     newLevelAudio.currentTime = 0;
     newLevelAudio.play();
 
+    const gameContainer = document.body.querySelector("#game");
+
     switch (!this.gameIsOver) {
       case this.level === 1:
         this.letterCreationSpeed = 0.99;
-        document.body.appendChild(level1);
-        let back = buildDom(`
-        <img src="img/Background1.jpg" alt="" id = "background1">
-        `);
-        //document.body.appendChild(back);
-        setBackgroundInGame("img/Background1.jpg");
+        gameContainer.removeAttribute("class");
+        gameContainer.setAttribute("class", "level1");
+        gameContainer.appendChild(level1);
         break;
       case this.level === 2:
         this.letterCreationSpeed = 0.98;
-        document.body.appendChild(level2);
-        setBackgroundInGame("img/Background2.jpg");
+        gameContainer.removeAttribute("class");
+        gameContainer.setAttribute("class", "level2");
+        gameContainer.appendChild(level2);
         break;
       case this.level === 3:
         this.letterCreationSpeed = 0.97;
-        document.body.appendChild(level3);
-        setBackgroundInGame("img/Background3.jpg");
+        gameContainer.removeAttribute("class");
+        gameContainer.setAttribute("class", "level3");
+        gameContainer.appendChild(level3);
         break;
       case this.level === 4:
         this.letterCreationSpeed = 0.96;
-        document.body.appendChild(level4);
-        setBackgroundInGame("img/Background4.jpg");
+        gameContainer.removeAttribute("class");
+        gameContainer.setAttribute("class", "level4");
+        gameContainer.appendChild(level4);
         break;
       case this.level === 5:
         this.letterCreationSpeed = 0.95;
-        document.body.appendChild(level5);
-        setBackgroundInGame("img/Background5.jpg");
+        gameContainer.removeAttribute("class");
+        gameContainer.setAttribute("class", "level5");
+        gameContainer.appendChild(level5);
         break;
     }
     setTimeout(() => {
@@ -120,11 +124,12 @@ class Game {
       this.cleanLetterArray();
 
       if (this.levelChange) {
+        // we check if the level time was up
         this.level++;
         this.levelChange = false;
         this.levelManager();
       } else if (!this.gameIsOver) {
-        // we call the looper inside the looper
+        // if Game is not Over we call the looper again
         window.requestAnimationFrame(loop);
       }
     };
