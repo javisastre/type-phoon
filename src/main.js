@@ -2,6 +2,7 @@
 
 let preSplashScreen, splashScreen, infoScreen, gameScreen, gameOverScreen, game;
 const cowSound = document.querySelector("#cow-sound");
+let cowStart = true;
 
 function buildDom(htmlCode) {
   const div = document.createElement("div");
@@ -50,11 +51,14 @@ function createSplashScreen() {
   const infoButton = splashScreen.querySelector("#info");
 
   // we set the cow's animation in here
-  setTimeout(() => {
-    splashScreen.querySelector("#cow").setAttribute("class", "moo");
-    cowSound.currentTime = 0;
-    cowSound.play();
-  }, 4000);
+  if (cowStart === true) {
+    setTimeout(() => {
+      splashScreen.querySelector("#cow").setAttribute("class", "moo");
+      cowSound.currentTime = 0;
+      cowSound.play();
+      cowStart = false;
+    }, 4000);
+  }
 
   // we add an Event Listener to that button.
   startButton.addEventListener("click", startGame);
