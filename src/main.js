@@ -26,8 +26,9 @@ function createPreSplashScreen() {
 
 function loadSplashScreen() {
   preSplashScreen.remove();
-  // play background sound
+  // we play background sound
   playBackgroundAudio();
+  // we launch the Spalsh screen
   createSplashScreen();
 }
 
@@ -204,6 +205,7 @@ function playBackgroundAudio() {
   const wind = document.querySelector("#wind");
   wind.currentTime = 0;
   wind.play();
+  wind.volume = 0.4;
   wind.loop = true;
 }
 
